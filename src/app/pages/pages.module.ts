@@ -15,20 +15,23 @@ import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component'
 
 import { SharedModule } from '../shared/shared.module';
 import { PipesModule } from '../pipes/pipes.module';
+import { ComponentsModule } from '../components/components.module';
+import { BusquedaComponent } from './busqueda/busqueda.component';
 
 
 @NgModule({
   declarations: [
-    AccountSettingsComponent,
-    ClientesComponent,
-    ClienteComponent,
     DashboardComponent,
     PagesComponent,
+    AccountSettingsComponent,
     PerfilComponent,
-    SubtemaComponent,
+    UsuariosComponent,
     TemasComponent,
     TemaComponent,
-    UsuariosComponent,
+    SubtemaComponent,
+    ClientesComponent,
+    ClienteComponent,
+    BusquedaComponent
   ],
   exports: [
     DashboardComponent,
@@ -36,11 +39,12 @@ import { PipesModule } from '../pipes/pipes.module';
   ],
   imports: [
     CommonModule,
-    FormsModule,
-    PipesModule,
+    ComponentsModule,
+    SharedModule,
     ReactiveFormsModule,
     RouterModule,
-    SharedModule
+    FormsModule,
+    PipesModule    
   ]
 })
 export class PagesModule { }
