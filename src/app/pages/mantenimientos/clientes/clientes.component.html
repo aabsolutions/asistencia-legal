@@ -1,0 +1,103 @@
+<div class="row animated fadeIn fast">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input type="text"
+                        class="form-control"
+                        placeholder="Buscar cliente..."
+                        #TxtBusqueda
+                        (keyup)="buscar(TxtBusqueda.value)"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn fast"
+     *ngIf="cargando">
+    <div class="col-12">
+        <div class="alert alert-info text-center">
+            <h4 class="alert-heading">Cargando</h4>
+            <i class="fa fa-spin fa-refresh fa-2x"></i>
+            <p class="mb-0">Por favor espere</p>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="row" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-8">
+                        <h4 class="card-title">Clientes ({{clientes.length}})</h4>
+                        <h6 class="card-subtitle">Clientes registrados en mi aplicación</h6>    
+                    </div>
+                    <div class="col">
+                        <div class="text-right">
+                            <a class="btn btn-primary"
+                             routerLink="/dashboard/clientes/nuevo">
+                                <i class="fa fa-hospital-o"></i>
+                                Crear cliente
+                            </a>
+                        </div>    
+                    </div>
+                 </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="w100">Foto</th>
+                                <th>Cédula</th>
+                                <th>Nombre completo</th>
+                                <th>Dirección</th>
+                                <th>Tipo cliente</th>
+                                <th>Celular</th>
+                                <th class="w100 text-nowrap">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let cliente of clientes">
+                                <td>
+                                    <img [src]="cliente.img | imagen:'clientes'" 
+                                    [alt]="[cliente.nombre_completo]"
+                                    class="w100 cursor"
+                                    (click)="abrirModal(cliente)"
+                                    >
+                                </td>
+                                <td>{{cliente.cedula}}</td>
+                                <td>{{cliente.nombre_completo}}</td>
+                                <td>{{cliente.direccion}}</td>
+                                <td>
+                                        <span *ngIf="cliente.tipo_cliente==='NATURAL'" class="label label-danger">Natural</span>
+                                        <span *ngIf="cliente.tipo_cliente==='JURIDICO'" class="label label-info">Jurídico</span>
+                                </td>
+                                <td>{{cliente.celular}}</td>
+                                <td class="text-nowrap text-center">
+                                    <a [routerLink]="['/dashboard/clientes', cliente._id]" data-toggle="tooltip" data-original-title="Edit"> 
+                                        <i class="fa fa-pencil text-inverse m-r-10"></i> 
+                                    </a>
+                                    <a [routerLink]="['/dashboard/temas/cliente', cliente._id]" data-toggle="tooltip" data-original-title="Edit"> 
+                                        <i class="fa fa-eye text-inverse m-r-10"></i> 
+                                    </a>
+                                    <a data-toggle="tooltip" 
+                                       data-original-title="Close"
+                                       class="cursor"
+                                       (click)="eliminarCliente(cliente)">
+                                        <i class="fa fa-close text-danger"></i> 
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <button (click)="cambiarPagina(-5)" class="btn btn-secondary">Anteriores</button>
+                    &nbsp;
+                    <button (click)="cambiarPagina(5)" class="btn btn-secondary">Siguientes</button>
+                </div>   
+            </div>
+        </div>
+    </div>
+</div>

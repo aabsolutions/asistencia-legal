@@ -8,7 +8,7 @@ import { LoginForm } from '../interfaces/login-form.interface';
 import { Observable, pipe, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { Usuario } from '../models/usuario.model';
-import { CargarUsuario } from '../interfaces/usuario';
+import { CargarUsuario } from '../interfaces/usuario.interface';
 
 const base_url = environment.base_url;
 

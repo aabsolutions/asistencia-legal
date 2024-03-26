@@ -3,18 +3,32 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { ClienteComponent } from './mantenimientos/clientes/cliente.component';
+import { ClientesComponent } from './mantenimientos/clientes/clientes.component';import { DashboardComponent } from './dashboard/dashboard.component';
 import { PagesComponent } from './pages.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { SubtemaComponent } from './mantenimientos/temas/subtema.component';
+import { TemaComponent } from './mantenimientos/temas/tema.component';
+import { TemasComponent } from './mantenimientos/temas/temas.component';
+import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
 
 import { SharedModule } from '../shared/shared.module';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 @NgModule({
   declarations: [
+    AccountSettingsComponent,
+    ClientesComponent,
+    ClienteComponent,
     DashboardComponent,
     PagesComponent,
-    PerfilComponent
+    PerfilComponent,
+    SubtemaComponent,
+    TemasComponent,
+    TemaComponent,
+    UsuariosComponent,
   ],
   exports: [
     DashboardComponent,
@@ -22,10 +36,11 @@ import { SharedModule } from '../shared/shared.module';
   ],
   imports: [
     CommonModule,
-    SharedModule,
+    FormsModule,
+    PipesModule,
     ReactiveFormsModule,
     RouterModule,
-    FormsModule  
+    SharedModule
   ]
 })
 export class PagesModule { }
