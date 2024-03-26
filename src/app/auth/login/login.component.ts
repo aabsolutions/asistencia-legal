@@ -18,7 +18,7 @@ export class LoginComponent {
   public formSumitted = false;
 
   public loginForm: FormGroup = this.fb.group({
-    email: [ localStorage.getItem('email') || 'angelbs.1985@gmail.com' , [ Validators.required, Validators.email ] ],
+    email: [ localStorage.getItem('email') || 'betovelez1980@gmail.com' , [ Validators.required, Validators.email ] ],
     password: ['12345', Validators.required ],
     remember: [false]
   });
