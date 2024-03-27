@@ -21,7 +21,6 @@ const childRoutes: Routes = [
   { path:'perfil', component: PerfilComponent, data: { titulo: 'Perfil' } },
   { path:'settings', component: AccountSettingsComponent, data: { titulo: 'Ajustes de cuenta' } },
   { path:'buscar/:termino', component: BusquedaComponent, data: { titulo: 'Buscar' } },
-
   
   //Rutas protegidas para admin
   { path:'usuarios', canActivate: [AdminGuard] ,component: UsuariosComponent, data: { titulo: 'Mantenimiento de usuarios' } },
