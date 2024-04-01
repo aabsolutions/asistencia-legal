@@ -37,7 +37,7 @@ export class TemaService {
           map( resp => {
             const temas = resp.temas.map(
               //hay que tener presente el orden en el que se traen los datos desde el modelo
-              tema => new Tema(tema.asunto, tema.texto, tema.fecha, tema.cliente, tema._id, tema.usuario, tema.adjunto)
+              tema => new Tema(tema.asunto, tema.texto, tema.fecha, tema.cliente, tema._id, tema.usuario, tema.img_public_id, tema.img_secure_url)
             );
             return {
               total: resp.total,
@@ -73,7 +73,7 @@ export class TemaService {
           map( resp => {
             const temas = resp.temas.map(
               //hay que tener presente el orden en el que se traen los datos desde el modelo
-              tema => new Tema(tema.asunto, tema.texto, tema.fecha, tema.cliente, tema._id, tema.usuario, tema.adjunto)
+              tema => new Tema(tema.asunto, tema.texto, tema.fecha, tema.cliente, tema._id, tema.usuario, tema.img_public_id, tema.img_secure_url)
             );
             return {
               total: resp.total,

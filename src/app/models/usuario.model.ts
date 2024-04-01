@@ -8,23 +8,24 @@ export class Usuario {
         public nombre: string,
         public email: string,
         public password?: string,
-        public img?: string,
+        public img_public_id?: string,
+        public img_secure_url?: string,
         public role?: 'ADMIN_ROLE'|'USER_ROLE',
         public uid?: string
     ){}
 
-    get imagenUrl(){
+    // get imagenUrl(){
 
-        if(!this.img){
-            return `${base_url}/uploads/usuarios/no-image`; 
-        }else if(this.img.includes('https')){
-            return this.img;
-        }else if(this.img){
-            return `${base_url}/uploads/usuarios/${this.img}`;
-        }else{
-            return `${base_url}/uploads/usuarios/no-image`;
-        }
-    }
+    //     if(!this.img){
+    //         return `${base_url}/uploads/usuarios/no-image`; 
+    //     }else if(this.img.includes('https')){
+    //         return this.img;
+    //     }else if(this.img){
+    //         return `${base_url}/uploads/usuarios/${this.img}`;
+    //     }else{
+    //         return `${base_url}/uploads/usuarios/no-image`;
+    //     }
+    // }
 
     get obtenerNombre(){
         return this.nombre;

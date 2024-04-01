@@ -34,7 +34,7 @@ export class FileUploadService {
 
       if ( data.ok ) {
         //TENER CUIDADO CON EL NOMBRE DE LOS CAMPOS DEVUELTOS EN LA RESPUESTA DEL BACKEND
-        return data.fileName;
+        return data.url;
       } else {
         return false;
       }

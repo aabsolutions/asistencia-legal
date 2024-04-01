@@ -59,8 +59,15 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let cliente of clientes">
-                                <td>
-                                    <img [src]="cliente.img | imagen:'clientes'" 
+                                <td *ngIf="!cliente.img_secure_url">
+                                    <img src="https://res.cloudinary.com/aabsolutions/image/upload/v1711909048/asistencia_legal/no-image.jpg" 
+                                    [alt]="[cliente.nombre_completo]"
+                                    class="w100 cursor"
+                                    (click)="abrirModal(cliente)"
+                                    >
+                                </td>
+                                <td *ngIf="cliente.img_secure_url">
+                                    <img [src]="cliente.img_secure_url" 
                                     [alt]="[cliente.nombre_completo]"
                                     class="w100 cursor"
                                     (click)="abrirModal(cliente)"

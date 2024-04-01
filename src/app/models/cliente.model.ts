@@ -12,7 +12,8 @@ export class Cliente{
         public celular: string,
         public correo: number,
         public tipo_cliente: string,
-        public img: string,
+        public img_public_id: string,
+        public img_secure_url: string,
         public usuario?: _ClienteUsuario,
         public _id?: string
     ){}

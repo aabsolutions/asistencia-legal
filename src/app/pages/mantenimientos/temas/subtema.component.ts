@@ -7,12 +7,10 @@ import { Location } from '@angular/common';
 
 import Swal from 'sweetalert2';
 
-import { TemaService } from 'src/app/services/tema.service';
-import { Tema } from 'src/app/models/tema.model';
-
 import { Subtema } from 'src/app/models/subtema.model';
-import { CargarSubtema } from '../../../interfaces/subtema.interface';
+
 import { FileUploadService } from 'src/app/services/file-upload.service';
+import { TemaService } from 'src/app/services/tema.service';
 
 @Component({
   selector: 'app-subtema',
@@ -85,11 +83,10 @@ export class SubtemaComponent implements OnInit {
           this.subtemaSeleccionado = subtema;
           this.subtemaForm.setValue({ asunto, texto });
 
-          if(this.subtemaSeleccionado.adjunto){
+          if(this.subtemaSeleccionado.img_secure_url){
             this.hayAdjunto = true;
-            this.urlAdjunto = `http://localhost:3000/api/uploads/subtemas/${ this.subtemaSeleccionado.adjunto }` ;
+            this.urlAdjunto = this.subtemaSeleccionado.img_secure_url;
           }
-
           return true;
         }
       )
@@ -111,7 +108,8 @@ export class SubtemaComponent implements OnInit {
         _id: stid,
         ...this.subtemaForm.value,
         fecha: this.todayWithPipe,
-        adjunto: this.subtemaSeleccionado.adjunto
+        img_public_id: this.subtemaSeleccionado.img_public_id,
+        img_secure_url: this.subtemaSeleccionado.img_secure_url
       }
 
       this.temaSrv.actualizarSubtema(data)
@@ -160,7 +158,8 @@ export class SubtemaComponent implements OnInit {
   }
 
   eliminarAdjunto(){
-    this.subtemaSeleccionado.adjunto = null;
+    this.subtemaSeleccionado.img_public_id = null;
+    this.subtemaSeleccionado.img_secure_url = null;
     this.guardarSubtema();
   }
 
@@ -168,7 +167,7 @@ export class SubtemaComponent implements OnInit {
     this.fileUploadService
       .actualizarFoto( this.archivoSubir, 'subtemas', this.subtemaSeleccionado._id )
       .then( img => {
-        this.subtemaSeleccionado.adjunto = img;
+        this.subtemaSeleccionado.img_secure_url = img;
         Swal.fire('Guardado', 'Adjunto registrado con éxito', 'success');
         this.router.navigateByUrl(`/dashboard/temas/${this.idTemaSeleccionado}`);
       }).catch( err => {

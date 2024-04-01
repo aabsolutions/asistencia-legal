@@ -38,7 +38,7 @@ export class ClienteService {
         map( resp => {
           const clientes = resp.clientes.map(
             //hay que tener presente el orden en el que se traen los datos desde el modelo
-            cliente => new Cliente(cliente.cedula, cliente.nombre_completo, cliente.direccion, cliente.celular, cliente.correo, cliente.tipo_cliente, cliente.img, cliente.usuario, cliente._id)
+            cliente => new Cliente(cliente.cedula, cliente.nombre_completo, cliente.direccion, cliente.celular, cliente.correo, cliente.tipo_cliente, cliente.img_public_id, cliente.img_secure_url, cliente.usuario, cliente._id)
           );
           return {
             total: resp.total,

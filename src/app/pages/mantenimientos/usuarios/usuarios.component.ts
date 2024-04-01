@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, delay } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { delay } from 'rxjs/operators';
 import { Usuario } from 'src/app/models/usuario.model';
 import { BusquedasService } from 'src/app/services/busquedas.service';
 import { ModalImagenService } from 'src/app/services/modal-imagen.service';
@@ -23,18 +24,22 @@ export class UsuariosComponent implements OnInit, OnDestroy{
                private busquedasSrv: BusquedasService,
                private modalImagenSrv: ModalImagenService){}
 
+  ngOnDestroy(): void {
+      this.imgSubs.unsubscribe;
+  }
+  
   ngOnInit(): void {
     this.cargarUsuarios();
-    this.imgSubs = this.imgSubs = this.modalImagenSrv.imagenCambio
+    this.imgSubs = this.modalImagenSrv.imagenCambio
       .pipe(
-        delay(200)
+        delay(100)
       )
-      .subscribe(img => this.cargarUsuarios());
+      .subscribe(img => {
+        this.cargarUsuarios()
+      });
   }
 
-  ngOnDestroy(): void {
-    this.imgSubs.unsubscribe;
-  }
+ 
 
   cargarUsuarios(){
     this.cargando = true;
@@ -111,6 +116,6 @@ export class UsuariosComponent implements OnInit, OnDestroy{
   }
 
   abrirModal(usuario: Usuario){
-    this.modalImagenSrv.abrirModal('usuarios', usuario.uid, usuario.img);
+    this.modalImagenSrv.abrirModal('usuarios', usuario.uid, usuario.img_secure_url);
   }
 }

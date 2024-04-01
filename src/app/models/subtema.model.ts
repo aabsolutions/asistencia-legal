@@ -17,6 +17,7 @@ export class Subtema{
         public tema: string,
         public _id?: string,
         public usuario?: _SubtemaUser,
-        public adjunto?: string
+        public img_public_id?: string,
+        public img_secure_url?: string
     ){}
 }

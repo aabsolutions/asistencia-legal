@@ -8,7 +8,10 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="user-profile">
-                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img [src]="usuario?.imagenUrl" alt="user" /><span class="hide-menu">{{ usuario?.nombre }} </span></a>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <img *ngIf="!usuario.img_secure_url" src="https://res.cloudinary.com/aabsolutions/image/upload/v1711909048/asistencia_legal/no-image.jpg" alt="user" />
+                                <img *ngIf="usuario.img_secure_url" [src]="usuario.img_secure_url" alt="user" />
+                                <span class="hide-menu">{{ usuario?.nombre }} </span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a routerLinkActive="active" routerLink="./perfil">Mi perfil </a></li>
                                 <li><a href="javascript:void()">Mi balance </a></li>

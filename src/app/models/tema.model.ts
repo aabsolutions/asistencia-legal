@@ -17,7 +17,8 @@ export class Tema{
         public cliente: _TemaCliente,
         public _id?: string,
         public usuario?: _TemaUser,
-        public adjunto?: string,
+        public img_public_id?: string,
+        public img_secure_url?: string,
         public createdAt?: Date,
         public updatedAt?: Date
     ){}

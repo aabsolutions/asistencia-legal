@@ -1,7 +1,4 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { environment } from 'src/environments/environment';
-
-const base_url = environment.base_url;
 
 @Injectable({
   providedIn: 'root'
@@ -26,13 +23,12 @@ export class ModalImagenService {
     this._ocultarModal = false;
     this.tipo = tipo;
     this.id = id;
-
-    if(img.includes('https')){
-      this.img = img;
+    console.log('Imagen es: ', img);
+    if(img=='no-image' || img.length==0){
+      this.img = 'https://res.cloudinary.com/aabsolutions/image/upload/v1711909048/asistencia_legal/no-image.jpg'
     }else{
-      this.img = `${base_url}/uploads/${tipo}/${img}`;
+      this.img = img;
     }
-
   }
 
   cerrarModal(){

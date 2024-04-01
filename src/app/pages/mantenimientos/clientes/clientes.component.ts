@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, delay } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { delay } from 'rxjs/operators';
 import { Cliente } from 'src/app/models/cliente.model';
 import { BusquedasService } from 'src/app/services/busquedas.service';
 import { ClienteService } from 'src/app/services/cliente.service';
@@ -31,9 +32,11 @@ export class ClientesComponent implements OnInit, OnDestroy {
         
   ngOnInit(): void {
     this.cargarClientes();
-    this.imgSubs = this.imgSubs = this.modalImagenSrv.imagenCambio
-    .pipe(delay(200))
-    .subscribe(img => this.cargarClientes());
+    this.imgSubs = this.modalImagenSrv.imagenCambio
+    .pipe(delay(100))
+    .subscribe(img => {
+      this.cargarClientes()
+    });
   }
 
   cargarClientes(){
@@ -70,6 +73,7 @@ export class ClientesComponent implements OnInit, OnDestroy {
       .subscribe(
         (resp: Cliente[]) => {
           this.clientes = resp;
+          console.log(this.clientes);
         });
       return true;
   }
@@ -110,7 +114,7 @@ export class ClientesComponent implements OnInit, OnDestroy {
   }
 
   abrirModal(cliente: Cliente){
-    this.modalImagenSrv.abrirModal('clientes', cliente._id );
+    this.modalImagenSrv.abrirModal('clientes', cliente._id, cliente.img_secure_url );
   }
 
 

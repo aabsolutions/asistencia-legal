@@ -110,9 +110,9 @@ export class TemaComponent implements OnInit {
           this.ultimaModificacion = this.dateWithPipe;
           this.ultimoUsuario = this.temaSeleccionado.usuario.nombre;
 
-          if(this.temaSeleccionado.adjunto){
+          if(this.temaSeleccionado.img_secure_url){
             this.hayAdjunto = true;
-            this.urlAdjunto = `http://localhost:3000/api/uploads/temas/${ this.temaSeleccionado.adjunto }` ;
+            this.urlAdjunto = this.temaSeleccionado.img_secure_url;
           }
           this.temaForm.setValue({ asunto, texto, cliente: cliente._id });
           this.mostrarSubtemas = true;
@@ -142,15 +142,20 @@ export class TemaComponent implements OnInit {
 
       const tid = this.temaSeleccionado._id;
 
-      const data = {
+      const data: Tema = {
         //van todos los campos del formulario más el id del usuario y cliente del tema seleccionado
         _id: tid,
         ...this.temaForm.value,
         usuario: this.temaSeleccionado.usuario,
         cliente: this.temaSeleccionado.cliente,
         fecha: this.temaSeleccionado.fecha,
-        adjunto: this.temaSeleccionado.adjunto       
+        img_public_id: this.temaSeleccionado.img_public_id,
+        img_secure_url: this.temaSeleccionado.img_secure_url
       }
+
+      //aquí hay que eliminar de la cloud también
+
+      console.log(data);
 
       this.temaSrv.actualizarTema(data)
           .subscribe(
@@ -235,7 +240,8 @@ export class TemaComponent implements OnInit {
   }
 
   eliminarAdjunto(tema: Tema){
-    this.temaSeleccionado.adjunto = null;
+    this.temaSeleccionado.img_public_id = null;
+    this.temaSeleccionado.img_secure_url = null;
     this.guardarTema();
   }
 
@@ -243,7 +249,7 @@ export class TemaComponent implements OnInit {
     this.fileUploadService
       .actualizarFoto( this.archivoSubir, 'temas', this.temaSeleccionado._id )
       .then( img => {
-        this.temaSeleccionado.adjunto = img;
+        this.temaSeleccionado.img_secure_url = img;
         Swal.fire('Guardado', 'Adjunto registrado con éxito', 'success');
         this.router.navigateByUrl(`/dashboard/temas/`);
       }).catch( err => {

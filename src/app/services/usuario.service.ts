@@ -65,8 +65,9 @@ export class UsuarioService {
       }
     }).pipe(
       map( (resp: any) => {
-        const { nombre, email, img='', google, role, uid } = resp.usuario;
-        this.usuario = new Usuario( nombre, email, '', img, role, uid );
+        const { nombre, email, img_public_id, img_secure_url, role, uid } = resp.usuario;
+        
+        this.usuario = new Usuario( nombre, email, '', img_public_id, img_secure_url, role, uid);
         this.guardarLocalStorage(resp.token, resp.menu);
         return true;
       }),
@@ -112,7 +113,7 @@ export class UsuarioService {
         map( resp => {
           const usuarios = resp.usuarios.map(
             //hay que tener presente el orden en el que se traen los datos desde el modelo
-            user => new Usuario(user.nombre, user.email, '', user.img, user.role, user.uid)
+            user => new Usuario(user.nombre, user.email, '', user.img_public_id, user.img_secure_url, user.role, user.uid)
           );
           return {
             total: resp.total,

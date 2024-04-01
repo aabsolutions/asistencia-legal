@@ -103,7 +103,7 @@ export class ClienteComponent implements OnInit {
   }
 
   abrirModal(cliente: Cliente){
-    this.modalImagenSrv.abrirModal('clientes',cliente._id)
+    this.modalImagenSrv.abrirModal('clientes',cliente._id, cliente.img_secure_url)
   }
     
 
